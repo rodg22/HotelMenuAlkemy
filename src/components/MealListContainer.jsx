@@ -7,8 +7,8 @@ function MealListContainer() {
 
   const getMealData = () => {
     let endpoints = [
-      "https://api.spoonacular.com/mealplanner/generate?timeFrame=day&diet=vegan&apiKey=cb1c464d94f142c08b156c5beddade8b",
-      "https://api.spoonacular.com/mealplanner/generate?timeFrame=day&vegan=false&apiKey=cb1c464d94f142c08b156c5beddade8b",
+      "https://api.spoonacular.com/mealplanner/generate?timeFrame=day&diet=vegan&apiKey=d1f70067f78248078e71a58983a18e5f",
+      "https://api.spoonacular.com/mealplanner/generate?timeFrame=day&vegan=false&apiKey=d1f70067f78248078e71a58983a18e5f",
     ];
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
       axios.spread((...mealData) => {
