@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useMenu } from "../context/MenuContext";
 import axios from "axios";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
@@ -7,17 +8,23 @@ import Badge from "react-bootstrap/Badge";
 
 export default function Meal({ meal }) {
   const [mealDetail, setMealDetail] = useState([]);
+  // const { menu, addItem, removeItem, clear, menuTotal } = useMenu();
 
   useEffect(() => {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/${meal.id}/information?apiKey=758f4f4ec2c44c36a18c733c11df0760&includeNutrition=false`
+        `https://api.spoonacular.com/recipes/${meal.id}/information?apiKey=cb1c464d94f142c08b156c5beddade8b&includeNutrition=false`
       )
       .then((response) => {
         console.log(response.data);
         setMealDetail(response.data);
       });
   }, [meal.id]);
+  const newArray = [];
+  let array = [...newArray, mealDetail];
+  console.log(array);
+
+  // addItem(mealDetail);
 
   return (
     <>
