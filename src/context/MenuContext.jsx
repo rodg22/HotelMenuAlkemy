@@ -8,8 +8,7 @@ export const MenuProvider = ({ children }) => {
   const [menu, setMenu] = useState([]);
 
   const addItem = async (item) => {
-    const newmenuItem = [...menu, await item];
-    setMenu(await newmenuItem);
+    setMenu([...menu, await item]);
   };
 
   //   const isInmenu = (item) => {
@@ -29,11 +28,13 @@ export const MenuProvider = ({ children }) => {
   //     }
   //   };
 
-  const menuTotal = () => {
-    let totalPrice = 0;
-    menu.map((item) => (totalPrice += item.pricePerServing));
-    return totalPrice;
-  };
+  //   const menuTotal = () => {
+  //     let totalPrice = 0;
+  //     menu.map((item) => {
+  //       totalPrice += item.pricePerServing;
+  //       return totalPrice;
+  //     });
+  //   };
 
   const MenuContextValues = {
     menu,
@@ -42,7 +43,7 @@ export const MenuProvider = ({ children }) => {
     // removeItem,
     // clear,
     // countItems,
-    menuTotal,
+    // menuTotal,
   };
 
   return (

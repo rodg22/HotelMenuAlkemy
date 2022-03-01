@@ -9,15 +9,17 @@ import Badge from "react-bootstrap/Badge";
 export default function Meal({ meal }) {
   const [mealDetail, setMealDetail] = useState([]);
 
-  const { menu, addItem } = useMenu();
+  const { addItem } = useMenu();
 
   useEffect(() => {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/${meal.id}/information?apiKey=db254b5cd61744d39a2deebd9c361444&includeNutrition=false`
+        `https://api.spoonacular.com/recipes/${meal.id}/information?apiKey=47b63e26c07a4117a95ae6eb8290311a&includeNutrition=false`
       )
       .then((response) => {
-        setMealDetail(response.data);
+        if (response.data !== []) {
+          setMealDetail(response.data);
+        }
       });
   }, [meal.id]);
 
