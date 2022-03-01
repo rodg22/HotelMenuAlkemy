@@ -7,9 +7,9 @@ export const useMenu = () => useContext(MenuContext);
 export const MenuProvider = ({ children }) => {
   const [menu, setMenu] = useState([]);
 
-  const addItem = (item) => {
-    const newmenuItem = [...menu, item];
-    setMenu(newmenuItem);
+  const addItem = async (item) => {
+    const newmenuItem = [...menu, await item];
+    setMenu(await newmenuItem);
   };
 
   //   const isInmenu = (item) => {

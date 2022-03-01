@@ -1,19 +1,19 @@
 import "./App.css";
-import AllVeganData from "./Services/AllVeganData";
-import AllNotVeganData from "./Services/AllNotVeganData";
 import Login from "./components/Login";
 import MealListContainer from "./components/MealListContainer";
+import { MenuProvider } from "./context/MenuContext";
 
 function App() {
   const alkemyToken = localStorage.getItem("alkemyToken");
-  AllVeganData();
-  AllNotVeganData();
+
   return (
     <div className="App">
-      <header>
-        <nav>HOTEL MENU</nav>
-      </header>
-      {!alkemyToken ? <Login /> : <MealListContainer />}
+      <MenuProvider>
+        <header>
+          <nav>HOTEL MENU</nav>
+        </header>
+        {!alkemyToken ? <Login /> : <MealListContainer />}
+      </MenuProvider>
     </div>
   );
 }

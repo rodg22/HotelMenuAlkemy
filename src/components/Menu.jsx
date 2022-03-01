@@ -1,10 +1,13 @@
+// import { useState } from "react";
 // import { useMenu } from "../context/MenuContext";
-// import { Link } from "react-router-dom";
 
-// const Menu = () => {
-//   const { menu, addItem, removeItem, clear, menuTotal } = useMenu();
-//   return
-//   <div>Menu</div>;
-// };
+// export default function Menu() {
+//   const [mealData, setMealData] = useState([]);
+//   const { menu } = useMenu();
+//   console.log(menu);
+//   return (
+//     <>
 
-// export default Menu;
+//     </>
+//   );
+// }
