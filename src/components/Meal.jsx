@@ -14,7 +14,7 @@ export default function Meal({ meal }) {
   useEffect(() => {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/${meal.id}/information?apiKey=47b63e26c07a4117a95ae6eb8290311a&includeNutrition=false`
+        `https://api.spoonacular.com/recipes/${meal.id}/information?apiKey=c42f8612fdc949fdbaab1dfffee48ed7&includeNutrition=false`
       )
       .then((response) => {
         if (response.data !== []) {

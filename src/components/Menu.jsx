@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 
 export default function Menu() {
   const { menu, setMenu } = useMenu();
-  console.log(menu);
 
   return (
     <>
@@ -19,23 +18,20 @@ export default function Menu() {
       {menu.length >= 1 && menu.length <= 4 ? (
         <>
           <div>
-            Total Price: US${" "}
-            {Math.round(menu.reduce((acc, el) => acc + el.pricePerServing, 0))}
+            Total Price: $
+            {menu.reduce((acc, el) => acc + el.pricePerServing, 0).toFixed(2)}
           </div>
           <div>
             Average preparation time:{" "}
             {Math.round(
-              menu.reduce(
-                (acc, el) => (acc + el.readyInMinutes) / menu.length,
-                0
-              )
+              menu.reduce((acc, el) => acc + el.readyInMinutes / menu.length, 0)
             )}{" "}
             minutes.
           </div>
           <div>
             Average health score:{" "}
-            {Math.round(
-              menu.reduce((acc, el) => (acc + el.healthScore) / menu.length, 0)
+            {Math.ceil(
+              menu.reduce((acc, el) => acc + el.healthScore / menu.length, 0)
             )}{" "}
             points.
           </div>
