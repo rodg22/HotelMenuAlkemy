@@ -1,8 +1,33 @@
+import { useEffect, useState } from "react";
 import { useMenu } from "../context/MenuContext";
 import Button from "react-bootstrap/Button";
+import "./Menu.css";
 
 export default function Menu() {
   const { menu, setMenu } = useMenu();
+  const [totalPrice, setTotalPrice] = useState([]);
+  const [preparationTime, setPreparationTime] = useState([]);
+  const [healthScore, setHealthScore] = useState([]);
+
+  useEffect(() => {
+    setTotalPrice(
+      menu.reduce((acc, el) => acc + el.pricePerServing, 0).toFixed(2)
+    );
+  }, [menu]);
+
+  useEffect(() => {
+    setPreparationTime(
+      Math.round(
+        menu.reduce((acc, el) => acc + el.readyInMinutes / menu.length, 0)
+      )
+    );
+  }, [menu]);
+
+  useEffect(() => {
+    setHealthScore(
+      Math.ceil(menu.reduce((acc, el) => acc + el.healthScore / menu.length, 0))
+    );
+  }, [menu]);
 
   return (
     <>
@@ -16,26 +41,19 @@ export default function Menu() {
       ) : null}
 
       {menu.length >= 1 && menu.length <= 4 ? (
-        <>
+        <div className="div-resultados">
           <div>
-            Total Price: $
-            {menu.reduce((acc, el) => acc + el.pricePerServing, 0).toFixed(2)}
+            Total Price: <span className="bold">$ {totalPrice}</span>
           </div>
           <div>
-            Average preparation time:{" "}
-            {Math.round(
-              menu.reduce((acc, el) => acc + el.readyInMinutes / menu.length, 0)
-            )}{" "}
-            minutes.
+            Average preparation time:
+            <span className="bold"> {preparationTime} minutes</span>.
           </div>
           <div>
-            Average health score:{" "}
-            {Math.ceil(
-              menu.reduce((acc, el) => acc + el.healthScore / menu.length, 0)
-            )}{" "}
-            points.
+            Average health score:
+            <span className="bold"> {healthScore} points</span>.
           </div>
-        </>
+        </div>
       ) : null}
     </>
   );
