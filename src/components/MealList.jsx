@@ -6,7 +6,14 @@ export default function MealList({ mealInfo }) {
     <section>
       <Row xs={1} sm={2} md={2} lg={4} className="g-4">
         {mealInfo.map((meal) => {
-          return <Meal key={meal.id} meal={meal} />;
+          return (
+            <Meal
+              key={meal.id}
+              id={meal.id}
+              title={meal.title}
+              readyInMinutes={meal.readyInMinutes}
+            />
+          );
         })}
       </Row>
     </section>

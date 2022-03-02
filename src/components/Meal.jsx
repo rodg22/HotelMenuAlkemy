@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useMenu } from "../context/MenuContext";
+import { Link } from "react-router-dom";
+import "./Meal.css";
 import axios from "axios";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 
-export default function Meal({ meal }) {
+export default function Meal({ id, readyInMinutes, title }) {
   const [mealDetail, setMealDetail] = useState([]);
 
   const { addItem } = useMenu();
@@ -14,14 +16,14 @@ export default function Meal({ meal }) {
   useEffect(() => {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/${meal.id}/information?apiKey=c42f8612fdc949fdbaab1dfffee48ed7&includeNutrition=false`
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=cb1c464d94f142c08b156c5beddade8b&includeNutrition=false`
       )
       .then((response) => {
         if (response.data !== []) {
           setMealDetail(response.data);
         }
       });
-  }, [meal.id]);
+  }, [id]);
 
   useEffect(() => {
     addItem(mealDetail);
@@ -34,14 +36,14 @@ export default function Meal({ meal }) {
           {mealDetail.vegan ? <Badge bg="success">veggie</Badge> : null}
           <Card.Img variant="top" src={mealDetail.image} />
           <Card.Body>
-            <Card.Title>{meal.title}</Card.Title>
-            {/* <Card.Text>{mealDetail.summary}</Card.Text> */}
-            <Card.Text>Prepare time: {meal.readyInMinutes} minutes</Card.Text>
-            <Card.Text>Price: $ {mealDetail.pricePerServing}</Card.Text>
-            <Card.Text>Health Score: {mealDetail.healthScore}</Card.Text>
-            <Card.Text>id: {meal.id}</Card.Text>
+            <Card.Title>{title}</Card.Title>
+            <Card.Text>id: {id}</Card.Text>
             <Button variant="danger">Delete</Button>{" "}
-            <Button variant="primary">See more</Button>{" "}
+            <Button variant="primary">
+              <Link className="link" to={`/meal/${id}`}>
+                See more
+              </Link>
+            </Button>{" "}
           </Card.Body>
         </Card>
       </Col>
